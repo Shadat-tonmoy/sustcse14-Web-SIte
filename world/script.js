@@ -83,7 +83,7 @@ $(document).ready(function(){
 			var done = false;
 			//var id = lastID = $('.load_more_posts').attr('lastId');
 			//alert(id);
-			$(window).unbind('scroll'),bind('scroll',function(){	
+			$(window).scroll(function(){	
 					var request = null;		
 					var lastID = $('.load_more_posts').attr('lastId');		
 					var scrollPosition = window.pageYOffset;
