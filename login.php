@@ -22,13 +22,13 @@
 				$cookie_name = "remember";
 				$cookie_value = $id;
 				setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //
-				header ("Location: index.php");
+				header ("Location:index.php");
 			}
 			else {
 				session_start();
 				$_SESSION['id']=$id;
 				echo $_SESSION['id'];
-				header ("Location: index.php");
+				header ("Location:index.php");
 			}
 		}
 		else header("Location: login_error.php");

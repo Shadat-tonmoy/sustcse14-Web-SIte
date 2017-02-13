@@ -65,7 +65,7 @@ date_default_timezone_set("ASIA/DHAKA");
 	  
 	  </style>
     <title>14's World</title>
-    <link rel="icon" href="http://localhost/project/images/icon.png">
+    <link rel="icon" href="../images/icon.png">
 		
 
 	</head>
@@ -78,7 +78,7 @@ date_default_timezone_set("ASIA/DHAKA");
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
       			</button>
-      			<a class="navbar-brand" href="http://localhost/project">
+      			<a class="navbar-brand" href="../">
               <img style="display:inline-block;margin-top: -15px;" src="images/logo.png" width="150px" height="45px">
             </a>
     		</div>
@@ -93,7 +93,7 @@ date_default_timezone_set("ASIA/DHAKA");
 	    				</a>
 	    			</li>
     				<li>
-    					<a href="dashboard.php">
+    					<a href="../dashboard.php">
 	    						<img src=<?php echo "../user_image/$image"?> class="navbar_img">
 
 	    						<span class="nav_menu_text">

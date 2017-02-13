@@ -336,9 +336,14 @@ $(document).ready(function(){
 			$("#class_div").hide();	
 		})
 		$.ajax({
+			method:"POST",
 			url:"class_update.php",
 			success:function(data){
 				$("#sample_class_update_div").html(data);		
+			}
+			error:function(data)
+			{
+				$("#sample_class_update_div").html(data);	
 			}
 		})
 		

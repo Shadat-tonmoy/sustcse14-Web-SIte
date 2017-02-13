@@ -76,8 +76,8 @@ else echo "Not set";
 	    			
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="http://localhost/project/world/world.php">
-								<img src="http://localhost/project/world/images/leave.png" class="navbar_img">
+							<a href="world.php">
+								<img src="images/leave.png" class="navbar_img">
 								<span class="nav_menu_text">Back To World</span>
 							</a>
 						</li>
