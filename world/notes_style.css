@@ -1,0 +1,122 @@
+.notes_nav{
+	color: white;
+	background-color: #2c3e50;
+	border-right: 6px solid #e67e22;
+	margin-top:-9px; 
+    height: 101vh;
+}
+.course_title{
+	padding: 15px;
+	cursor: pointer;
+	font-size: 15px;
+}
+.course_title:hover{
+	opacity: 0.6;
+	transition: opacity 0.5s; 
+}
+.nav_heading{
+    font-size: 18px;
+    background-color: #c0392b;
+    margin-top: 20px;
+    width: 107%;
+    height: 50px;
+    line-height: 50px;
+}
+.course_icon{
+    background-color: #2ecc71;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 50px;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 10px;
+    font-weight: bold;
+}
+.foreground{
+	overflow: hidden;
+	cursor: pointer;
+	width: 110%;
+    height: 100%;
+    background-color: #2c3e50;
+    color: white;
+    opacity: 0;
+}
+.foreground_text{
+	margin-top: 30px;
+    text-align: center;
+    background: #d35400;
+    height: 50px;
+    line-height: 50px;
+}
+.img_fg{
+	width: 120px;
+	height: 120px;
+	display: block;
+}
+#note_bg:hover #note_fg{
+	opacity: 0.85;
+	transition: opacity 0.8s;
+}
+
+#book_bg:hover #book_fg{
+	opacity: 0.85;
+	transition: opacity 0.8s;
+}
+#question_bg:hover #question_fg{
+    opacity: 0.85;
+    transition: opacity 0.8s;
+}
+#others_bg:hover #others_fg{
+    opacity: 0.85;
+    transition: opacity 0.8s;
+}
+.notes_body_text{
+	top: 45vh;
+    color: wheat;
+    text-align: center;
+    font-size: 30px;
+    font-style: italic;
+}
+.error{
+    border: 2px solid red;
+}
+.no_error{
+    border: 2px solid green;
+}
+.note_table{
+    position: relative;
+    top: 100px;
+}
+.nothing_found_msg{
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    display: block;
+    width: 50%;
+    background: #e74c3c;
+    height: 50px;
+    line-height: 50px;
+    border-left: 3px solid #ecf0f1;
+}
+.note_table_header{
+    color: white;
+    font-size: 25px;
+    display: block;
+    width: 40%;
+    background: #27ae60;
+    height: 50px;
+    line-height: 50px;
+    border-left: 3px solid #ecf0f1;
+    margin-left: 5%;
+}
+.author_icon{
+    width: 35px;
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 5px;
+
+}

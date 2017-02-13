@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+<script>
+function check(str) {
+if (str.length == 0) { 
+document.getElementById("demo").innerHTML = "";
+return;
+} else {
+document.getElementById("demo").innerHTML = str
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+document.getElementById("demo").innerHTML = this.responseText;
+}
+};
+xmlhttp.open("GET", "demo.php?u=" + str, true);
+xmlhttp.send();
+}
+}
+</script>
+</head>
+<body>
+<center>
+<form>
+<div style="margin-top:200px">
+<h3 id="demo">  </h3>
+Enter Username to check availability: <input type="text" name="user" placeholder="EnterUserName" onKeyUp="check(this.value)"/> 
+</div>
+</form>
+</center>
+</body>
+</html>
