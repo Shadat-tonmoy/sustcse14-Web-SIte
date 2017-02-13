@@ -339,8 +339,9 @@ $(document).ready(function(){
 			method:"POST",
 			url:"class_update.php",
 			success:function(data){
-				$("#sample_class_update_div").html(data);		
-			}
+				$("#sample_class_update_div").html(data);
+				//alert(data);		
+			},
 			error:function(data)
 			{
 				$("#sample_class_update_div").html(data);	

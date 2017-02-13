@@ -51,7 +51,7 @@
     		<div class="collapse navbar-collapse" id="myNavbar">
     			<ul class="nav navbar-nav">
     				<li>
-    					<a href="http://localhost/project/world/world.php" id="home_btn">
+    					<a href="http://sustcse14.xyz/world/world.php" id="home_btn">
 	    						<img src="world/images/home.ico" class="navbar_img">
 	    						<span class="nav_menu_text">
 	    							Home
@@ -59,7 +59,7 @@
 	    				</a>
 	    			</li>
     				<li>
-    					<a href="http://localhost/project/dashboard.php">
+    					<a href="http://sustcse14.xyz/dashboard.php">
 	    						<img src=<?php echo "user_image/$image"?> class="navbar_img">
 
 	    						<span class="nav_menu_text">
@@ -95,7 +95,7 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="http://localhost/project">
+						<a href="../">
 							<img src="world/images/leave.png" class="navbar_img">
 							<span class="nav_menu_text">Leave World</span>
 						</a>
