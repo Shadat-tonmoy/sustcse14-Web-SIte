@@ -6,7 +6,8 @@
 	{
 		$user_name = $_POST['user_name'];
 		$password = $_POST['pwd'];
-		$sql = "SELECT * FROM user_data WHERE user_name='$user_name' AND password='$password'";
+		$password_hash = md5($password);
+		$sql = "SELECT * FROM user_data WHERE user_name='$user_name' AND password='$password_hash'";
 		$result = mysqli_query($conn,$sql);
 		$rows = mysqli_num_rows($result);
 		if($rows)
