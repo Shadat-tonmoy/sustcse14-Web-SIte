@@ -58,7 +58,7 @@ else echo "Not set";
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span> 
 	      			</button>
-	      			<a class="navbar-brand" href="http://localhost/project">
+	      			<a class="navbar-brand" href="../">
               			<img style="display:inline-block;margin-top: -15px;" src="images/logo.png" width="150px" height="45px">
             		</a>
 	    		</div>

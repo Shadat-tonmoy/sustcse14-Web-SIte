@@ -4,6 +4,7 @@
 	if(isset($_POST['old_ps']))
 	{
 		$old_ps = $_POST['old_ps'];
+		$old_ps_hash = md5($old_ps);
 		//echo "from php $old_ps";
 		$id = $_SESSION['id'];
 		$sql = "SELECT password FROM user_data WHERE `id`=$id";
@@ -12,7 +13,7 @@
 		{
 			$row = mysqli_fetch_assoc($result);
 			$password = $row['password'];
-			if($password==$old_ps)
+			if($password==$old_ps_hash)
 				echo "1";
 			else echo "0";
 		}

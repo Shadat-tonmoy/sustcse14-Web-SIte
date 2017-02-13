@@ -425,7 +425,7 @@ $(document).ready(function(){
 
 		$(".semester_img").click(function(){
 			var id = $(this).attr("id");
-			window.location.replace("http://localhost/project/world/notes.php?id="+id);
+			window.location.replace("notes.php?id="+id);
 		})
 
 

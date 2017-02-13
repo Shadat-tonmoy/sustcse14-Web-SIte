@@ -443,6 +443,6 @@ user_name_edit==1 && email_edit==1)
 		$("#success_msg_ps_change").slideUp(500);
 	})
 	$("#view_btn,#view_btn_ps").click(function(){
-		window.location.replace("http://localhost/project/dashboard.php");
+		window.location.replace("dashboard.php");
 	})
 })

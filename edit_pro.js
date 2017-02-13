@@ -111,7 +111,7 @@ function checkFirstNameEdit(){
 		if(fn_edit==1 && ln_edit==1 && un_edit==1)
 		{
 			var reg_edit = $("#reg_no_dash").text();
-			alert(reg);
+			//alert(reg);
 			
 			
 		}

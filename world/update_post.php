@@ -13,7 +13,7 @@ if(isset($_POST['status_btn']) && isset($_POST['post']) && !empty($_POST['post']
 	{
 		$sql_new = "UPDATE new_post SET new_post=1";
 		$result_new = mysqli_query($conn,$sql_new);
-		header("Location: http://localhost/project/world/world.php");
+		header("Location: world.php");
 	}
 	else echo mysqli_error($conn);
 }

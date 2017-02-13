@@ -158,7 +158,7 @@ $(document).ready(function(){
 						data:{notification:notification},
 						success:function(data)
 						{
-							window.location.replace("http://localhost/project/world/world.php");
+							//window.location.replace("http://localhost/project/world/world.php");
 							//alert(data);
 						}
 					})
