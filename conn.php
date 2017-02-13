@@ -3,8 +3,8 @@
 	date_default_timezone_set("ASIA/DHAKA");
 	$server = "localhost";
 	$username = "root";
-	$password = "sustcse12";
-	$db = "14batch";
+	$password = "";
+	$db = "wiki";
 	$conn = mysqli_connect($server,$username,$password);
 	/*
 	if(!$conn)

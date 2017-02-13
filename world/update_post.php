@@ -6,7 +6,7 @@ if(isset($_POST['status_btn']) && isset($_POST['post']) && !empty($_POST['post']
 	$posted_at = date("Y-m-d H:i:s");
 	$id = $_SESSION['id'];
 	$post = $_POST['post'];
-	echo "You have posted ".$post;
+	// echo "You have posted ".$post;
 	$sql = "INSERT INTO posts (`post`,`posted_by`,`posted_at`) VALUES ('$post','$id','$posted_at')";
 	$result = mysqli_query($conn,$sql);
 	if($result)
