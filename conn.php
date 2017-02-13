@@ -1,11 +1,12 @@
 <?php
-	//clearstatcache();
+	clearstatcache();
 	date_default_timezone_set("ASIA/DHAKA");
 	$server = "localhost";
 	$username = "root";
-	$password = "";
-	$db = "wiki";
+	$password = "sustcse12";
+	$db = "14batch";
 	$conn = mysqli_connect($server,$username,$password);
+	/*
 	if(!$conn)
 	{
 		echo "Couldnot connect to the server";
@@ -17,5 +18,12 @@
 	{
 		echo "Could not select database";
 		die();
+	}
+	*/
+	
+	$conn = new mysqli($server, $username, $password, $db);
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
 	}
 ?>
