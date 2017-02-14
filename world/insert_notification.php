@@ -25,7 +25,7 @@
 				{
 					echo "UPDATED";
 					$delete_past_sql = "DELETE FROM `notification` WHERE `date`<='$past_days'";
-					$delete_past_result = mysqli_query($delete_past_sql);
+					$delete_past_result = mysqli_query($conn,$delete_past_sql);
 
 				}
 			}
