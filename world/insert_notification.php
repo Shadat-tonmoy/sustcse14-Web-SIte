@@ -28,12 +28,15 @@
 					$delete_past_result = mysqli_query($conn,$delete_past_sql);
 
 				}
+				else echo mysqli_error($conn);
 			}
-			else echo "VUA";
+			else echo mysqli_error($conn);
 
 		}
+		else echo mysqli_error($conn);
 		//echo "FROM PHP $notification";
 	}
+	else echo mysqli_error($conn);
 
 
 

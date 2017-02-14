@@ -36,14 +36,15 @@ else if(isset($_POST['course']) && isset($_POST['start_hrs']) && isset($_POST['s
 	
 	$class_update_sql = "INSERT INTO `class_update`(`date`, `course_name`, `start_time`, `end_time`, `venue`) VALUES ('$date','$course','$start_time','$end_time','$venue')";
 	$class_update_result = mysqli_query($conn,$class_update_sql);
+	$affected_row = mysqli_affected_rows($conn);
 	if($class_update_result)
 	{
 		echo "Success";
 	}
-	else echo "Mara Khau".mysqli_error($conn);
+	else echo mysqli_error($conn);
 	//}
 }
-else echo "VUA";
+else echo mysqli_error($conn);
 
 
 
