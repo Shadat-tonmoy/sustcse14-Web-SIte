@@ -197,7 +197,7 @@
 								async:false,
 								data:{date:date,course:course,start_hrs:start_hrs,start_min:start_min,end_hrs:end_hrs,end_min:end_min,venue:venue},
 								success:function(data){									//alert(data);
-									//alert(data);
+									alert(data);
 									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
 								}
@@ -215,7 +215,7 @@
 								{
 									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
-									//alert(data);
+									alert(data);
 								}
 							})
 					}
@@ -230,7 +230,7 @@
 								{
 									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
-									//alert(data);
+									alert(data);
 								}
 							})
 						//window.location.replace("http://localhost/project/world/world.php");
