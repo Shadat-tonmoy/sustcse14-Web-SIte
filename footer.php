@@ -66,8 +66,8 @@
 				</span>
 				<br>
 				<h5 style="display: inline-block;color:#f39c12">Special Thanks To </h5><br>
-				<img src="images/infancy.png" class="footer_img">
-				<span>Infancy IT</span>
+				<img src="images/scdn.jpg" class="footer_img">
+				<span>SCDN Lab</span>
 			</div>
 
 			<div class="col-lg-offset-1 col-sm-offset-1 col-md-offset-1 col-xs-offset-1 col-lg-4 col-sm-4 col-md-4 col-xs-4">

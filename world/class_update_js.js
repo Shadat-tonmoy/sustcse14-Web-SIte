@@ -165,6 +165,7 @@
 						url:"update_class.php",
 						data:{del:del},
 						success:function(data){
+							var tmp = data;
 							//alert(data);
 
 						}
@@ -193,9 +194,11 @@
 							$.ajax({
 								method:"post",
 								url:"update_class.php",
+								async:false,
 								data:{date:date,course:course,start_hrs:start_hrs,start_min:start_min,end_hrs:end_hrs,end_min:end_min,venue:venue},
 								success:function(data){									//alert(data);
 									//alert(data);
+									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
 								}
 							})
@@ -210,6 +213,7 @@
 								data:{notification:notification},
 								success:function(data)
 								{
+									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
 									//alert(data);
 								}
@@ -224,6 +228,7 @@
 								data:{notification:notification},
 								success:function(data)
 								{
+									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
 									//alert(data);
 								}

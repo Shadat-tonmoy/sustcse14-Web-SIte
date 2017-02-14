@@ -43,7 +43,7 @@
 								<h6 style="background-color:#337AB7; height:40px; line-height:40px;  color:white; text-align:right; letter-spacing:5px;"> Jubair Azam</h6>
 							</div>
 							<div class="col-lg-2 col-sm-2 col-xs-2 col-md-2">
-								<img class="img-responsive img-thumbnail" src="images/jubair.jpg" width="100px" height="80px"/>
+								<img class="img-responsive img-thumbnail" src="images/Jubair.jpg" width="100px" height="80px"/>
 							</div>
 						</div>
 
