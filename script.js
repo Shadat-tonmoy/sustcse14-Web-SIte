@@ -1,5 +1,11 @@
 
 $(document).ready(function(){
+	$(".navbar").hide();
+})
+$(window).load(function(){
+	//alert("done");
+			$("#preloader").fadeOut(600);
+			$(".navbar").fadeIn(500);
 			$("#code_div_1").hide();
 			$("#tired_div").hide();
 			$("#eat_div").hide();

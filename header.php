@@ -38,6 +38,15 @@
 		{
 			background-color: transparent;
 		}
+		#preloader { 
+			position: fixed;
+			left: 0;
+			top: 0;
+			z-index: 999; 
+			width: 100%; 
+			height: 100%; 
+			overflow: visible; 
+			background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; }
 	  
 	  </style>
 	  <title>SUST CSE 14 Batch - Official</title>
@@ -63,6 +72,8 @@
 			$('[data-toggle="popover"]').popover(); 
 		});
 	</script>
+	<div id="preloader">
+	</div>
 	
 	<!--Code for Navebar-->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
