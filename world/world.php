@@ -142,9 +142,9 @@ date_default_timezone_set("ASIA/DHAKA");
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fixed-left" >
 			<div class="row" id="sample_class_update_div">
-				<div class="comment_loading"> 				
+				<div class="comment_loading" id="class_update_loader"> 				
 					<center>
-						<img src="images/loading.gif" style="width: 40px; height: 40px;">
+						<img src="images/loading.gif" style="width: 60px; height: 60px;">
 					</center>
 				</div>
 
@@ -504,6 +504,11 @@ date_default_timezone_set("ASIA/DHAKA");
 
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 fixed" > 
 			<div class="row" style="background-color:" id="exam_update_sample_div">
+        <div class="comment_loading" id="exam_update_loader">        
+          <center>
+            <img src="images/loading.gif" style="width: 60px; height: 60px;">
+          </center>
+        </div>
 
       </div>
 			<div class="row" style="background-color:">

@@ -166,6 +166,7 @@
 						data:{del:del},
 						success:function(data){
 							var tmp = data;
+							//alert("Class delete alert - "+data);
 							//alert(data);
 
 						}
@@ -197,7 +198,7 @@
 								async:false,
 								data:{date:date,course:course,start_hrs:start_hrs,start_min:start_min,end_hrs:end_hrs,end_min:end_min,venue:venue},
 								success:function(data){									//alert(data);
-									alert("Class update alert - "data);
+									//alert("Class update alert - "+data);
 									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
 								}
@@ -215,7 +216,7 @@
 								{
 									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
-									alert("Class update notification alert - "data);
+									//alert("Class update notification alert - "+data);
 								}
 							})
 					}
@@ -230,7 +231,7 @@
 								{
 									var tmp = data;
 									//window.location.replace("http://localhost/project/world/world.php");
-									alert("Class update notification alert - "data);
+									//alert("Class update notification alert - "+data);
 								}
 							})
 						//window.location.replace("http://localhost/project/world/world.php");

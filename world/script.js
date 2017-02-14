@@ -51,7 +51,12 @@ $(document).ready(function(){
 									{
 										$.ajax({
 											url:"class_update.php",
+											beforeSend:function(data)
+											{
+												//$("#class_update_loader").show();
+											},
 											success:function(data){
+												//$("#class_update_loader").hide();
 												$("#sample_class_update_div").html(data);		
 											}
 										})
@@ -65,7 +70,12 @@ $(document).ready(function(){
 									{
 										$.ajax({
 											url:"upcoming_exam.php",
+											beforeSend:function(data)
+											{
+												//$("#exam_update_loader").show();
+											},
 											success:function(data){
+												//$("#exam_update_loader").hide();
 												$("#exam_update_sample_div").html(data);		
 											}
 										})

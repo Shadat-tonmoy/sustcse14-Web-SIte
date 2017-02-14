@@ -74,7 +74,7 @@ $(document).ready(function(){
                         async:false,
                         success:function(data){
                               ok = true;
-                              alert("Exam Update alert "+data);
+                              //alert("Exam Update alert "+data);
                               //window.location.replace("http://localhost/project/world/world.php");
                         }
                   })
@@ -88,7 +88,7 @@ $(document).ready(function(){
                         data:{notification:notification},
                         success:function(data)
                         {
-                              alert("Exam Update notification alert "+data);
+                              //alert("Exam Update notification alert "+data);
                               //window.location.replace("http://localhost/project/world/world.php");
                               //alert(data);
                         }
@@ -114,7 +114,7 @@ $(document).ready(function(){
                   data:{notification:notification},
                   success:function(data)
                   {
-                        alert("Exam Update remove notificationalert "+data);
+                        //alert("Exam Update remove notificationalert "+data);
                         //$("#exam_update").modal("toggle");
                         //window.location.replace("http://localhost/project/world/world.php");      //alert(data);
                   }
