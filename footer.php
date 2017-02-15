@@ -101,7 +101,7 @@
 				<h5 class="footer_heading">For Any Query  </h5>
 				<br>
 				<div class="social">
-					<a href="https://www.facebook.com/shadat.tonmoy">
+					<a href="https://www.facebook.com/shadat.tonmoy" target="_blank">
 						<img src="images/fb.png" class="footer_img">
 					</a>
 

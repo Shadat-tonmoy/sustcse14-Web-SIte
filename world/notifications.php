@@ -19,6 +19,11 @@
 			$am_pm = "AM";
 			$hour = $time_array[0];
 			$minute = $time_array[1];
+			if($hour==0)
+			{
+				$am_pm = "AM";
+				$hour = 12;
+			}
 			if($hour>12)
 			{
 				$am_pm = "PM";

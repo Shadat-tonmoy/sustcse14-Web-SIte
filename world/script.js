@@ -7,6 +7,7 @@ $(document).ready(function(){
 			var notifications_num = 0;
 			checkNotification();
 			var time_interval = setInterval(checkNotification,30*1000);
+			
 			function checkNotification()
 			{				
 				$.ajax({
@@ -53,10 +54,10 @@ $(document).ready(function(){
 											url:"class_update.php",
 											beforeSend:function(data)
 											{
-												//$("#class_update_loader").show();
+												$("#class_update_loader").show();
 											},
 											success:function(data){
-												//$("#class_update_loader").hide();
+												$("#class_update_loader").hide();												//$("#class_update_loader").hide();
 												$("#sample_class_update_div").html(data);		
 											}
 										})
@@ -66,16 +67,18 @@ $(document).ready(function(){
 								else if(exam_check!=-1)
 								{
 									//alert("HI");
-									notify.onclick = function()
+									notify.onclick = function(event)
 									{
+										//alert("HI");
 										$.ajax({
+											async:false,
 											url:"upcoming_exam.php",
 											beforeSend:function(data)
 											{
-												//$("#exam_update_loader").show();
+												$("#exam_update_loader").show();
 											},
 											success:function(data){
-												//$("#exam_update_loader").hide();
+												$("#exam_update_loader").show();
 												$("#exam_update_sample_div").html(data);		
 											}
 										})
@@ -89,19 +92,20 @@ $(document).ready(function(){
 					})
 				}
 			}
-			$(".load_more_posts").hide();
+			$(".more_post_loader").hide();
 			var done = false;
 			//var id = lastID = $('.load_more_posts').attr('lastId');
 			//alert(id);
-			$(window).scroll(function(){	
+			$(".load_more_posts").unbind('click').bind('click',function(){	
 					var request = null;		
-					var lastID = $('.load_more_posts').attr('lastId');		
-					var scrollPosition = window.pageYOffset;
-					var windowSize = window.innerHeight;
-					var bodyHeight = document.body.offsetHeight;
-					var different = Math.max(bodyHeight - (scrollPosition + windowSize), 0);
+					var lastID = $('.load_more_posts').attr('lastId');	
+					//alert(lastID);	
+					//var scrollPosition = window.pageYOffset;
+					//var windowSize = window.innerHeight;
+					//var bodyHeight = document.body.offsetHeight;
+					//var different = Math.max(bodyHeight - (scrollPosition + windowSize), 0);
 					//alert("Diff is "+different);
-					if(different==0 && lastID!=null)
+					if(lastID!=null)
 					{
 						//alert("SENDING.....");						//alert(lastID);
 						request = $.ajax({
@@ -111,6 +115,8 @@ $(document).ready(function(){
 			                //async:true,
 			                beforeSend:function(html){
 			                    $(".load_more_posts").show();
+			                    $(".more_post_loader").show();
+
 			                },
 			                success:function(data){
 			                	//var load_more = $('.load_more_posts').html();
@@ -140,55 +146,59 @@ $(document).ready(function(){
 			var index2 = id.indexOf("-");
 			var like_dislike = id.slice(index2+1,index);
 			var part = id.slice(index+1,len);
-			//alert(part);			//alert(part);
+			var dislike = id.search("dislike");
+			//alert(dislike);		
+			if(dislike==-1)
+			{
+				if($("#txt-like_"+part).hasClass("liked"))
+				{
+					$("#txt-like_"+part).removeClass("liked");
+					$("#txt-like_"+part).text("Like");
+					var i
+					var like_count = $("#like_count_"+part).text();
+					//alert(like_count);
+					like_count--;
+					$("#like_count_"+part).text(like_count);
+				}
+				else 
+				{
+					var i
+					var like_count = $("#like_count_"+part).text();
+					//alert(like_count);
+					like_count++;
+					$("#like_count_"+part).text(like_count);
+					$("#txt-like_"+part).addClass("liked");
+					$("#txt-like_"+part).text("Liked");
+
+				}
+			}
+			else 
+			{
+				if($("#txt-dislike_"+part).hasClass("disliked"))
+				{
+					var i;
+					var dislike_count = $("#dislike_count_"+part).text();					//alert(like_count);
+					dislike_count--;
+					$("#dislike_count_"+part).text(dislike_count);
+					$("#txt-dislike_"+part).removeClass("disliked");
+					$("#txt-dislike_"+part).text("Dislike");
+				}
+				else 
+				{
+					var i;
+					var dislike_count = $("#dislike_count_"+part).text();					//alert(like_count);
+					dislike_count++;
+					$("#dislike_count_"+part).text(dislike_count);
+
+					$("#txt-dislike_"+part).addClass("disliked");
+					$("#txt-dislike_"+part).text("Disiked");
+
+				}
+			}//alert(part);
 			$.ajax({
 				method:"post",
 				url:"like_update.php",
 				data:{part:part,like_dislike:like_dislike},
-				success:function(data)
-				{
-					//alert(data);					//alert(data);
-					if(data[0]==="l")
-					{
-						var i,str="";
-						for(i=5;i<data.length;i++)
-							str+=data[i];
-						//alert(str);
-						$("#txt-like_"+part).addClass("liked");
-						$("#txt-like_"+part).text("Liked");
-						$("#like_count_"+part).text(str);
-					}
-					else if(data[0]==="u")
-					{
-						var i,str="";
-						for(i=7;i<data.length;i++)
-							str+=data[i];
-						//alert(str);
-						$("#txt-like_"+part).removeClass("liked");
-						$("#txt-like_"+part).text("Like");
-						$("#like_count_"+part).text(str);
-					}
-					else if(data[0]==="d")
-					{
-						var i,str="";
-						for(i=8;i<data.length;i++)
-							str+=data[i];
-						//alert(str);
-						$("#txt-dislike_"+part).addClass("liked");
-						$("#txt-dislike_"+part).text("Disliked");
-						$("#dislike_count_"+part).text(str);
-					}
-					else if(data[0]==="n")
-					{
-						var i,str="";
-						for(i=12;i<data.length;i++)
-							str+=data[i];
-						//alert(str);
-						$("#txt-dislike_"+part).removeClass("liked");
-						$("#txt-dislike_"+part).text("Dislike");
-						$("#dislike_count_"+part).text(str);
-					}
-				}
 			})
 		}))
 		$(".comment_div").hide();
@@ -217,7 +227,7 @@ $(document).ready(function(){
 			$(div_id).slideToggle(500);
 
 		})
-		$(".comment_box").keydown(function(event){
+		$(".comment_box").unbind('keydown').bind('keydown',function(event){
 			if(event.keyCode==13)
 			{
 				var id = $(this).attr("id");
@@ -443,6 +453,7 @@ $(document).ready(function(){
 			var id = $(this).attr("id");
 			window.location.replace("notes.php?id="+id);
 		})
+		$(".notes_body_loader").hide();
 
 
 		$(".course_title").click(function(){
@@ -451,8 +462,13 @@ $(document).ready(function(){
 				method:"post",
 				url:"notes_list.php",
 				data:{course:course},
+				beforeSend:function(){
+					$(".notes_body_loader").show();
+
+				},
 				success:function(data)
-				{					//alert("ki");
+				{
+					$(".notes_body_loader").hide();					//alert("ki");
 					$("#notes_body_content").html(data);
 					//$("#notes_body_text").effect("slide",800);
 					$("#notes_body_text").hide();

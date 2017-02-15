@@ -46,7 +46,9 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
       			</button>
-      			<a class="navbar-brand" href="#">14's World</a>
+      			<a class="navbar-brand" href="./">
+					<img style="display:inline-block;margin-top: -15px;" src="images/logo.png" width="150px" height="45px">
+				</a>
     		</div>
     		<div class="collapse navbar-collapse" id="myNavbar">
     			<ul class="nav navbar-nav">
@@ -95,7 +97,7 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="../">
+						<a href="http://www.sustcse14.xyz/">
 							<img src="world/images/leave.png" class="navbar_img">
 							<span class="nav_menu_text">Leave World</span>
 						</a>

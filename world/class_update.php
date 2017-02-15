@@ -8,6 +8,7 @@
 	<title></title>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			$("#class_update_loader").hide();
 			$("#show_all_class_btn").click(function(){
 			date = $("#class_date").attr("date");
 			//alert(date);
@@ -62,6 +63,11 @@
 			</span> : </strong>
 		</div>
 		<div class="panel-body" style="border:2px solid #e67e22">
+				<div class="comment_loading" id="class_update_loader"> 				
+					<center>
+						<img src="images/loading.gif" style="width: 60px; height: 60px;">
+					</center>
+				</div>
 			<div class="row" style="margin-bottom:-20px">
 				<div class="table-responsive">
 					<table id="class_table" class="table" style="font-size: 11px;">

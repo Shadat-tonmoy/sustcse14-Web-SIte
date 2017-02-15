@@ -1,11 +1,29 @@
 <?php
 include '../conn.php';
+session_start();
+if(isset($_SESSION['id']))
+{
+
+}
+else 
+{
+?>
+<div style="width: 100%; height: 100%; left: 0; top:0; background-color: #d35400; color:white">
+    <h2>You are not logged in</h2>
+</div>
+<?php
+	die();
+}
 //include 'header.php';
 if(isset($_GET['id']))
 {
 	$id = $_GET['id'];
 }
-else echo "Not set";
+else {
+	echo "Not set";
+	die();
+
+}
 
 
 
@@ -17,14 +35,12 @@ else echo "Not set";
 	  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	  <script type="text/javascript">
-	  	$(document).load(function(){
-	  		$("#notes_page").hide();
-	  		$("#loader").show();
-	  	})
 	  	$(document).ready(function(){
-	  		$("#loader").hide();
+	  		$("#notes_page").hide();
+	  	})
+	  	$(window).load(function(){
+	  		$("#notes_preloader").hide();
 	  		$("#notes_page").show();
-	  		
 	  	})
 	  	
 	  </script>
@@ -32,7 +48,8 @@ else echo "Not set";
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style.css" >
+	<link rel="icon" href="images/icon.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -40,14 +57,37 @@ else echo "Not set";
 	<script src="script.js" type="text/javascript"></script>
 	<script src="form_validate.js" type="text/javascript"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	<style type="text/css">
+		#notes_preloader { 
+			position: fixed;
+			left: 0;
+			top: 0;
+			z-index: 999; 
+			width: 100%; 
+			height: 100%; 
+			overflow: visible; 
+			background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; 
+		}
+		.notes_body_loader{
+
+			position: fixed;
+			left: 24.5%;
+			top: 0;
+			z-index: 999; 
+			width:75.5%; 
+			height: 100%; 
+			overflow: visible; 
+			background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; 
+
+
+		}
+	</style>
+	
+
 </head>
 
 <body>
-<center id="loader" style="background-color: #2c3e50;height: 100vh;">
-	<div>
-		<img src="images/loader.gif" style="width: 150px; height: 150px; margin-top: 40vh;">
-	</div>	
-</center>
+<div id="notes_preloader"></div>
 
 <div id="notes_page">
 	<nav class="navbar navbar-inverse navbar-fixed-top" style="height: 55px; line-height: 55px;">
@@ -137,6 +177,7 @@ else echo "Not set";
 
 		<div class="col-lg-9" style="background-image: url(images/study_bg.jpg); background-size: 100% 100%; background-attachment: fixed; background-repeat: no-repeat;padding: 0px;margin-bottom: 0px;" id="">
 			<div style="background-color: rgba(44,62,80,0.6); width: 100%;height: 100vh;margin: 0px; overflow: hidden;" id="notes_body" class="" >
+					<div class="notes_body_loader"></div>
 					<div id="notes_body_content" style="position: relative;">
 						
 					</div>

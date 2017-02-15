@@ -46,7 +46,8 @@
 			width: 100%; 
 			height: 100%; 
 			overflow: visible; 
-			background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; }
+			background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; 
+		}
 	  
 	  </style>
 	  <title>SUST CSE 14 Batch - Official</title>

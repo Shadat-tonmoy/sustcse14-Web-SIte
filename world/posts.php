@@ -29,6 +29,12 @@
 						$am_pm = "AM";
 						$hour = $time_array[0];
 						$minute = $time_array[1];
+						if($hour==0)
+						{
+							$am_pm = "AM";
+							$hour = 12;
+
+						}
 						if($hour>12)
 						{
 							$am_pm = "PM";
@@ -136,7 +142,7 @@
 						if(isset($visited_dislike[$post_id]))
 						{
 					?>
-					<span class='ldc_txt liked' id=<?php echo "txt-dislike_$post_id" ?> >Disliked</span> <span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id" ?> > <?php echo $number_of_dislike ?> </span>
+					<span class='ldc_txt disliked' id=<?php echo "txt-dislike_$post_id" ?> >Disliked</span> <span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id" ?> > <?php echo $number_of_dislike ?> </span>
 					<?php 
 
 						}

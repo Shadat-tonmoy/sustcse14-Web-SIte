@@ -2,7 +2,21 @@
 ob_start();
 session_start();
 include '../conn.php';
-$id = $_SESSION['id'];
+if(isset($_SESSION['id']))
+{
+  $id = $_SESSION['id'];
+}
+else 
+{
+?>
+<div style="width: 100%; height: 100%; left: 0; top:0; background-color: #d35400; color:white">
+    <h2>You are not logged in</h2>
+</div>
+<?php 
+  die();
+
+}
+
 $sql = "SELECT * FROM `user_data` WHERE id=$id";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($result);
@@ -142,11 +156,7 @@ date_default_timezone_set("ASIA/DHAKA");
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fixed-left" >
 			<div class="row" id="sample_class_update_div">
-				<div class="comment_loading" id="class_update_loader"> 				
-					<center>
-						<img src="images/loading.gif" style="width: 60px; height: 60px;">
-					</center>
-				</div>
+				
 
 			</div>
 			<div class="row" style="">
@@ -492,10 +502,11 @@ date_default_timezone_set("ASIA/DHAKA");
 				</div>				
 			</div>
 
-       <div class="load_more_posts" lastId = <?php echo $post_id; ?> >         
+       <div>         
           <center>
-            <img src="images/loading.gif" style="width: 60px; height: 60px;">
+            <button class="btn btn-default load_more_posts" lastId = <?php echo $post_id; ?> > More Posts</button>
           </center>
+          
         </div>
 			
 						
@@ -504,11 +515,7 @@ date_default_timezone_set("ASIA/DHAKA");
 
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 fixed" > 
 			<div class="row" style="background-color:" id="exam_update_sample_div">
-        <div class="comment_loading" id="exam_update_loader">        
-          <center>
-            <img src="images/loading.gif" style="width: 60px; height: 60px;">
-          </center>
-        </div>
+       
 
       </div>
 			<div class="row" style="background-color:">

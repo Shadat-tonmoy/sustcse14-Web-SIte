@@ -77,7 +77,7 @@
 					Welcome To The World of SUST CSE-14...
 				</h4>
 				<article class="welcome pull-right" id="another_text">
-					Lorem ipsum dolor sit amet delenit augue duis
+					The coolest area of Awesomeness, Friendship and Happiness 
 				</article>	
 			</div>
 			

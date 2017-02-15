@@ -70,6 +70,12 @@ for($i=1;$i<count($disliked_posts_array);$i++)
 							if($hour<10)
 								$hour = "0".$hour;
 						}
+						if($hour==0)
+						{
+							$am_pm = "AM";
+							$hour = 12;
+
+						}
 						$time = "$hour:$minute $am_pm";
 						$date_array = array();
 						$date_array = explode('-', $posted_at_date);
@@ -205,12 +211,14 @@ for($i=1;$i<count($disliked_posts_array);$i++)
 				}
 
 					?>
-					<div class="load_more_posts" lastId = <?php if(isset($post_id)) echo $post_id; else echo NULL; ?> >					
-						<center>
-								<img src="images/loading.gif" style="width: 60px; height: 60px;">
-						</center>
-					</div>
-
+					<div>         
+			          <center>
+			            <button class="btn btn-default load_more_posts" lastId = <?php if(isset($post_id)) echo $post_id; else echo NULL; ?> > More Posts</button>
+			          </center>
+			          <center class="more_post_loader">
+			            <img src="images/loading.gif" style="width: 60px; height: 60px;">
+			          </center>
+        			</div>
 
 				<?php
 			}

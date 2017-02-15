@@ -6,6 +6,7 @@ include '../conn.php';
 <head>
 	<title></title>
 	<script type="text/javascript">
+		$("#exam_update_loader").hide();
 		$("#exam_update_btn").click(function(){
 			$.ajax({
 				method:"post",
@@ -37,6 +38,11 @@ include '../conn.php';
 		<strong style="font-size: 11px; color: white;">Upcoming Exams : </strong>
 	</div>
 	<div class="panel-body" style="border:2px solid #e67e22">
+	 	<div class="comment_loading" id="exam_update_loader">        
+          <center>
+            <img src="images/loading.gif" style="width: 60px; height: 60px;">
+          </center>
+        </div>
 	<?php
 		$current_date = date("Y-m-d");
 		$exam_sql = "SELECT * FROM `exam_update` WHERE `date`>='$current_date' ORDER BY `date` LIMIT 3";
