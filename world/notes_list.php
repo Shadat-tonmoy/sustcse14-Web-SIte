@@ -199,7 +199,7 @@ else $course_name = "ERROR IN COURSE NAME";
 					<td style="line-height: 40px;"> <span class="author_icon" style="background-color: <?php echo $color_array[$ran_num]; ?>" ><?php echo $author[0]; ?></span><?php echo $author?>
 					</td>
 					<td>
-						<a href=<?php echo $link?> ><img src="images/download.png"; width="40px"; height="40px";></a>
+						<a href=<?php echo $link?> target="_blank" ><img src="images/download.png"; width="40px"; height="40px";></a>
 					</td>
 					<td style="line-height: 40px;"><?php echo $desc?></td>
 					<?php 
