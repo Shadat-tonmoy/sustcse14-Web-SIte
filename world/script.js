@@ -157,7 +157,8 @@ $(document).ready(function(){
 					var i
 					var like_count = $("#like_count_"+part).text();
 					//alert(like_count);
-					like_count--;
+					if(like_count>0)
+						like_count--;
 					$("#like_count_"+part).text(like_count);
 				}
 				else 
@@ -178,7 +179,8 @@ $(document).ready(function(){
 				{
 					var i;
 					var dislike_count = $("#dislike_count_"+part).text();					//alert(like_count);
-					dislike_count--;
+					if(dislike_count>0)
+						dislike_count--;
 					$("#dislike_count_"+part).text(dislike_count);
 					$("#txt-dislike_"+part).removeClass("disliked");
 					$("#txt-dislike_"+part).text("Dislike");

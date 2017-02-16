@@ -36,8 +36,9 @@ if(isset($_POST['part']) && isset($_POST['like_dislike']))
 			//for($i=0; $i<count($updated_likers); $i++)
 				//echo $updated_likers[$i]." ";
 			$str = implode(',', $updated_likers);
-			//echo $str;
-			$like_sql = "UPDATE `posts` SET `liked_by`= '$str' WHERE `id`=$post_id";
+			if(sizeof($updated_likers)-1==0)
+				$like_sql = "UPDATE `posts` SET `liked_by`= NULL  WHERE `id`=$post_id";
+			else $like_sql = "UPDATE `posts` SET `liked_by`= '$str' WHERE `id`=$post_id";			
 			$like_result = mysqli_query($conn,$like_sql);
 			if($like_result)
 			{
@@ -70,7 +71,9 @@ if(isset($_POST['part']) && isset($_POST['like_dislike']))
 						}
 					}
 					$updated_liked_posts = implode(',', $liked_posts_array_updated);
-					$update_like_posts_sql = "UPDATE `user_data` SET `liked_posts`= '$updated_liked_posts' WHERE `id`=$id";
+					if(sizeof($liked_posts_array_updated)-1==0)
+						$update_like_posts_sql = "UPDATE `user_data` SET `liked_posts`= NULL WHERE `id`=$id";
+					else $update_like_posts_sql = "UPDATE `user_data` SET `liked_posts`= '$updated_liked_posts' WHERE `id`=$id";					
 					$updated_liked_posts_result = mysqli_query($conn,$update_like_posts_sql);
 
 				}
@@ -80,7 +83,7 @@ if(isset($_POST['part']) && isset($_POST['like_dislike']))
 		}
 		else 
 		{
-			$like_sql = "UPDATE `posts` SET `liked_by` = concat(`liked_by`,',$id') WHERE `id`=$post_id";
+			$like_sql = "UPDATE `posts` SET `liked_by` = IFNULL(concat(`liked_by`,',$id'),',$id') WHERE `id`=$post_id";
 			$like_result = mysqli_query($conn,$like_sql);
 
 			$like_posts_search_sql = "SELECT `liked_posts` FROM `user_data` WHERE `id`=$id";
@@ -99,7 +102,8 @@ if(isset($_POST['part']) && isset($_POST['like_dislike']))
 				}
 				else 
 				{
-					$like_sql_on_user = "UPDATE `user_data` SET `liked_posts` = concat(`liked_posts`,',$post_id') WHERE `id`=$id";
+					$like_sql_on_user = "UPDATE `user_data` SET `liked_posts` = IFNULL(concat(`liked_posts`,',$post_id'),',$post_id') WHERE `id`=$id";
+
 					$like_result_on_user = mysqli_query($conn,$like_sql_on_user);
 
 				}
@@ -149,11 +153,11 @@ if(isset($_POST['part']) && isset($_POST['like_dislike']))
 
 				}
 			}
-			//for($i=0; $i<count($updated_likers); $i++)
-				//echo $updated_likers[$i]." ";
+
 			$str = implode(',', $updated_dislikers);
-			//echo $str;
-			$dislike_sql = "UPDATE `posts` SET `disliked_by`= '$str' WHERE `id`=$post_id";
+			if(sizeof($updated_dislikers)-1==0)
+				$dislike_sql = "UPDATE `posts` SET `disliked_by`= NULL  WHERE `id`=$post_id";
+			else $dislike_sql = "UPDATE `posts` SET `disliked_by`= '$str' WHERE `id`=$post_id";			//echo $str;
 			$dislike_result = mysqli_query($conn,$dislike_sql);
 			if($dislike_result)
 			{
@@ -185,8 +189,11 @@ if(isset($_POST['part']) && isset($_POST['like_dislike']))
 
 						}
 					}
+
 					$updated_disliked_posts = implode(',', $disliked_posts_array_updated);
-					$update_dislike_posts_sql = "UPDATE `user_data` SET `disliked_posts`= '$updated_disliked_posts' WHERE `id`=$id";
+					if(sizeof($disliked_posts_array_updated)-1==0)
+						$update_dislike_posts_sql = "UPDATE `user_data` SET `disliked_posts`= NULL WHERE `id`=$id";
+					else $update_dislike_posts_sql = "UPDATE `user_data` SET `disliked_posts`= '$updated_disliked_posts' WHERE `id`=$id";
 					$updated_disliked_posts_result = mysqli_query($conn,$update_dislike_posts_sql);
 
 				}
@@ -196,7 +203,7 @@ if(isset($_POST['part']) && isset($_POST['like_dislike']))
 		}
 		else 
 		{
-			$dislike_sql = "UPDATE `posts` SET `disliked_by` = concat(`disliked_by`,',$id') WHERE `id`=$post_id";
+			$dislike_sql = "UPDATE `posts` SET `disliked_by` = IFNULL(concat(`disliked_by`,',$id'),',$id') WHERE `id`=$post_id";
 			$dislike_result = mysqli_query($conn,$dislike_sql);
 
 			$dislike_posts_search_sql = "SELECT `disliked_posts` FROM `user_data` WHERE `id`=$id";
@@ -215,7 +222,7 @@ if(isset($_POST['part']) && isset($_POST['like_dislike']))
 				}
 				else 
 				{
-					$dislike_sql_on_user = "UPDATE `user_data` SET `disliked_posts` = concat(`disliked_posts`,',$post_id') WHERE `id`=$id";
+					$dislike_sql_on_user = "UPDATE `user_data` SET `disliked_posts` = IFNULL(concat(`disliked_posts`,',$post_id'),',$post_id') WHERE `id`=$id";					
 					$dislike_result_on_user = mysqli_query($conn,$dislike_sql_on_user);
 
 				}
