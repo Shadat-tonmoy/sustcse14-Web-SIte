@@ -35,6 +35,10 @@ include 'footer.php';
 		
 		</style>
 		<title>SUST CSE 14 Batch - Official</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="SUST CSE 14 Batch">
+		<meta name="keywords" content="SUST,CSE,SUST CSE,SUST CSE 14,SUST CSE 14 Batch" >
+		<meta name="author" content="Shadat Tonmoy">
 	</head>
 	<body id="home_body" class="home_body">
 		 
