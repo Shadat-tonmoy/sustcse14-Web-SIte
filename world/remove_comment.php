@@ -10,6 +10,7 @@ if(isset($_POST['comment_id']))
 	{
 		echo "Removed";
 	}
+
 }
 
 

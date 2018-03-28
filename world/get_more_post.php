@@ -41,6 +41,47 @@ for($i=1;$i<count($disliked_posts_array);$i++)
 <head>
 	<title></title>
 	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="see_who_liked.js"></script>
+	<style>
+.toooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.toooltip .toooltiptext {
+    visibility: hidden;
+    width: 8vw;
+    background-color: #000000;
+    color: #fff;
+    text-align: left;
+    border-radius: 4px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -160%;
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 0.8vw;
+}
+
+.toooltip .toooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 80%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000000 transparent transparent transparent;
+}
+
+.toooltip:hover .toooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+</style>
 </head>
 <body>
 			<?php
@@ -155,13 +196,27 @@ for($i=1;$i<count($disliked_posts_array);$i++)
 						if(isset($visited[$post_id]))
 						{
 					?>
-					<span class='ldc_txt liked' id=<?php echo "txt-like_$post_id" ?> >Liked</span> <span class='badge' style="font-size: 0.9vw"  id=<?php echo "like_count_$post_id" ?> > <?php echo $number_of_like ?> </span>
+					<span class='ldc_txt liked toooltip toooltip_like' id=<?php echo "txt-like_$post_id" ?> >
+						<span id=<?php echo "liked_$post_id"; ?> ac >Liked</span>
+						<span class="toooltiptext" id=<?php echo "tooltip_text_$post_id"?> >
+							Loading...
+						</span>
+					</span>
+
+					<span class='badge' style="font-size: 0.9vw"  id=<?php echo "like_count_$post_id" ?> > <?php echo $number_of_like ?> </span>
 					<?php 
 
 						}
 						else{
 					?>
-					<span class='ldc_txt' id=<?php echo "txt-like_$post_id" ?> >Like</span> <span class='badge' style="font-size: 0.9vw" id=<?php echo "like_count_$post_id"?> > <?php echo $number_of_like ?> </span>
+					<span class='ldc_txt toooltip toooltip_like' id=<?php echo "txt-like_$post_id" ?> >
+						<span id=<?php echo "like_$post_id"; ?> ac > Like </span>
+						<span class="toooltiptext" id=<?php echo "tooltip_text_$post_id"?> >
+							Loading...
+						</span>
+					</span> 
+
+					<span class='badge' style="font-size: 0.9vw" id=<?php echo "like_count_$post_id"?> > <?php echo $number_of_like ?> </span>
 
 					<?php
 							}
@@ -177,13 +232,25 @@ for($i=1;$i<count($disliked_posts_array);$i++)
 						if(isset($visited_dislike[$post_id]))
 						{
 					?>
-					<span class='ldc_txt liked' id=<?php echo "txt-dislike_$post_id" ?> >Disliked</span> <span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id" ?> > <?php echo $number_of_dislike ?> </span>
+					<span class='ldc_txt disliked toooltip toooltip_dislike' id=<?php echo "txt-dislike_$post_id" ?> >
+						Disliked
+						<span class="toooltiptext" id=<?php echo "tooltip_text_dislike_$post_id"?> >
+						Loading...
+						</span>
+					</span>
+					<span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id" ?> > <?php echo $number_of_dislike ?> </span>
 					<?php 
 
 						}
 						else{
 					?>
-					<span class='ldc_txt' id=<?php echo "txt-dislike_$post_id" ?> >Disike</span> <span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id"?> > <?php echo $number_of_dislike ?> </span>
+					<span class='ldc_txt toooltip toooltip_dislike' id=<?php echo "txt-dislike_$post_id" ?> >
+						Disike
+						<span class="toooltiptext" id=<?php echo "tooltip_text_dislike_$post_id"?> >
+						Loading...
+						</span>
+					</span>
+					<span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id"?> > <?php echo $number_of_dislike ?> </span>
 
 					<?php
 							}
@@ -194,12 +261,17 @@ for($i=1;$i<count($disliked_posts_array);$i++)
 						
 						<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
 							<img class='ldc_img' src='images/comment.png'/>
-							<span class='ldc_txt comment_btn' id=<?php echo "comment_btn_$post_id"; ?>>Comments</span> 
+							<span class='toooltip ldc_txt comment_btn' id=<?php echo "comment_btn_$post_id"; ?> >
+								Comments
+								<span class="toooltiptext" >
+									View All Comments
+								</span>
+							</span> 
 						</div>
 						
 						<div class="form-group comment_div" style="margin-top: 15px;" id=<?php echo "comment_div_$post_id" ?>>
 						<br>
-  							<textarea class="form-control comment_box" rows="1" id=<?php echo "comment_box_$post_id"?> style="resize: none;" placeholder="Write Your Comment Here"></textarea>
+  							<textarea class="form-control comment_box" rows="2" id=<?php echo "comment_box_$post_id"?> style="resize: none;" placeholder="Write Your Comment Here"></textarea>
   							<br>
   							<div id=<?php echo "comment_list_div_$post_id" ?>>
   								

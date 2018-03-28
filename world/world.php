@@ -45,116 +45,17 @@ for($i=1;$i<count($disliked_posts_array);$i++)
 	$visited_dislike[$disliked_posts_array[$i]] = 1;
 }
 date_default_timezone_set("ASIA/DHAKA");
+include 'world_header.php';
 //echo "<img src='../user_image/$image'/>"
 ?>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="../style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>		
-		<script src="script.js" type="text/javascript"></script>		
-		<script src="http://malsup.github.com/jquery.form.js"></script> 
+    
+  </head>
 
-		<style>
-		  body{
-			margin:0px;
-			padding:0px;
-			overflow-x: hidden;
-		  
-		  }
-			.container-fluid{
-				width:100%;
-			
-			}
-			#class_update .modal-dialog{
-				width: 80%;
-			}
-	  
-	  </style>
-    <title>14's World</title>
-    <link rel="icon" href="../images/icon.png">
-		
-
-	</head>
 	<body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" style="height: 55px; line-height: 55px;">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span> 
-      			</button>
-      			<a class="navbar-brand" href="../">
-              <img style="display:inline-block;margin-top: -15px;" src="images/logo.png" width="150px" height="45px">
-            </a>
-    		</div>
-    		<div class="collapse navbar-collapse" id="myNavbar">
-    			<ul class="nav navbar-nav">
-    				<li>
-    					<a href="world.php" id="home_btn">
-	    						<img src="images/home.ico" class="navbar_img">
-	    						<span class="nav_menu_text">
-	    							Home
-	    						</span>
-	    				</a>
-	    			</li>
-    				<li>
-    					<a href="../dashboard.php">
-	    						<img src=<?php echo "../user_image/$image"?> class="navbar_img">
-
-	    						<span class="nav_menu_text">
-	    							Your Account
-	    						</span>
-	    				</a>
-	    			</li>
-	    			<!--
-	    			<li>
-    					<a id="msg_btn">
-	    						<img src="images/message.ico" class="navbar_img">
-	    					Messages
-	    				</a>
-	    				<div id="msg_dropdown">
-		    				<div class="tri" id="tri">
-		    					heh
-		    				</div>
-		    				<div class="msg_box" id="msg_box">
-		    					<a href="http://facebook.com">Your Message Will Be Shown Here</a>
-		    				</div>	
-						</div>
-	    				
-	    			</li>
-	    			
-	    			<li>
-    					<a href="#" id="notification_btn">
-	    						<img src="images/notification.png" class="navbar_img">
-	    					Notifications
-	    				</a>
-	    			</li>
-	    			-->
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="../">
-							<img src="images/leave.png" class="navbar_img">
-							<span class="nav_menu_text">Leave World</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<br><br><br><br>
 	<div class="row">
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fixed-left" >
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 " style="position: fixed; width: 24%" >
 			<div class="row" id="sample_class_update_div">
 				
 
@@ -179,7 +80,7 @@ date_default_timezone_set("ASIA/DHAKA");
 			</div>
 		</div>
 
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="background-color: #ecf0f1;margin-left: 24%;">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="background-color: #ecf0f1;margin-left: 24%;">
 			
 			<div id="class_update" class="modal fade" role="dialog">
  				 <div class="modal-dialog">
@@ -489,8 +390,20 @@ date_default_timezone_set("ASIA/DHAKA");
 
 				<form method="post" action="update_post.php">
 					<textarea name="post" cols="80" rows="4" class="status_box form-control" placeholder=" Share with your mates...."></textarea>
-					<br>
-					<input type="submit" name="status_btn" value="Share" class=" status_btn"/>	
+					
+          <div class="form-group" id="add_link_panel">
+            <br>
+            <label class="close_link_panel">Close(x)</label>
+            <br>
+
+            <label for="link_id" class="link_label">Link : </label>
+            <input id="link_id" type="text" name="link_field" class="form-control link_field" placeholder="http://" /> 
+            <span class="glyphicon glyphicon-plus add_more_link"></span>
+          </div>
+          <br>
+          <button type="button" name="link_btn" value="Add Link" class="link_btn" ><span class="glyphicon glyphicon-link"></span> Add Link</button>
+          <button type="button" name="image_btn" value="Add Image" class="image_btn" ><span class="glyphicon glyphicon-picture"></span> Add Image</button>
+          <button type="submit" name="status_btn" value="Share" class="status_btn" ><span class="glyphicon glyphicon-share"></span> Share</button>	
 				</form>
 			</div>
 			<br>
@@ -513,7 +426,7 @@ date_default_timezone_set("ASIA/DHAKA");
 		</div>
 
 
-		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 fixed" > 
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="position: fixed;right: 1%;width : 23%;"> 
 			<div class="row" style="background-color:" id="exam_update_sample_div">
        
 

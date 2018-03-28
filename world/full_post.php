@@ -1,61 +1,88 @@
 <?php
-	include '../conn.php';
+session_start();
+include '../conn.php';
+if(isset($_GET['post_id']))
+{
+	$post_id = $_GET['post_id'];
+	//echo $post_id;
+}
+if(isset($_SESSION['id']))
+{
+  $id = $_SESSION['id'];
+}
+else 
+{
+?>
+<div style="width: 100%; height: 100%; left: 0; top:0; background-color: #d35400; color:white">
+    <h2>You are not logged in</h2>
+</div>
+<?php 
+  die();
+}
+
+$sql = "SELECT * FROM `user_data` WHERE id=$id";
+$result = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($result);
+$first_name = $row['first_name'];
+$last_name = $row['last_name'];
+$user_name = $row['user_name'];
+$image = $row['image'];
+$liked_posts = $row['liked_posts'];
+$disliked_posts = $row['disliked_posts'];
+$liked_posts_array = array();
+$liked_posts_array = explode(',', $liked_posts);
+$visited =array();
+
+$disliked_posts_array = array();
+$disliked_posts_array = explode(',', $disliked_posts);
+$visited_dislike =array();
 
 
+for($i=1;$i<count($liked_posts_array);$i++)
+{
+	$visited[$liked_posts_array[$i]] = 1;
+}
+
+for($i=1;$i<count($disliked_posts_array);$i++)
+{
+	$visited_dislike[$disliked_posts_array[$i]] = 1;
+}
+date_default_timezone_set("ASIA/DHAKA");
+include 'world_header.php';
+//echo "<img src='../user_image/$image'/>"
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.toooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.toooltip .toooltiptext {
-    visibility: hidden;
-    width: 8vw;
-    background-color: #000000;
-    color: #fff;
-    text-align: left;
-    border-radius: 4px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -160%;
-    opacity: 0;
-    transition: opacity 1s;
-    font-size: 0.8vw;
-}
-
-.toooltip .toooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 80%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #000000 transparent transparent transparent;
-}
-
-.toooltip:hover .toooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-</style>
-
-	<title></title>
+<script type="text/javascript">
+	$(window).load(function(){
+		var id = $(".comment_div").attr("id");
+		var i,post_id="";
+		for(i=12;i<id.length;i++)
+			post_id+=id[i];
+		$.ajax({
+				method:"post",
+				url:"comment.php",
+				data:{post_id:post_id},
+				beforeSend:function(html){
+			    	$("#comment_loading_"+post_id).show();
+				},				
+				success:function(data)
+				{
+					$("#comment_loading_"+post_id).remove();
+					$("#comment_list_div_"+post_id).html(data);
+					$("#comment_div_"+post_id).show();
+					return false;
+				}
+			})
+	})
+</script>
+<head>
 </head>
 <body>
-
-<div id="post_list">
+	<div class="col-lg-7 col-lg-offset-2">
 			<?php
-				$post_sql = "SELECT * FROM posts  ORDER BY posted_at DESC LIMIT 5 ";
+				$post_sql = "SELECT * FROM posts WHERE `id`='$post_id' ";
 				$post_result = mysqli_query($conn,$post_sql);
 				if($post_result)
 				{
@@ -98,8 +125,6 @@
 						$likes = $post_row['liked_by'];
 						$like_array = array();
 						$like_array = explode(',', $likes);
-						
-						//echo $liked_by_names;
 						$number_of_like = count($like_array)-1;
 
 						$dislikes = $post_row['disliked_by'];
@@ -166,27 +191,13 @@
 						if(isset($visited[$post_id]))
 						{
 					?>
-					<span id=<?php echo "txt-like_$post_id"; ?> class='ldc_txt liked toooltip toooltip_like'  >
-						<span id=<?php echo "liked_$post_id"; ?> ac >Liked</span>
-						<span class="toooltiptext" id=<?php echo "tooltip_text_$post_id"?> >
-						Loading....
-						</span>
-					</span> 
-					<span id=<?php echo "like_count_$post_id"; ?>  class='badge' style="font-size: 0.9vw"  > 
-						<?php echo $number_of_like ?> 
-					</span>
+					<span class='ldc_txt liked' id=<?php echo "txt-like_$post_id" ?> >Liked</span> <span class='badge' style="font-size: 0.9vw"  id=<?php echo "like_count_$post_id" ?> > <?php echo $number_of_like ?> </span>
 					<?php 
 
 						}
 						else{
 					?>
-					<span id=<?php echo "txt-like_$post_id"; ?>  class='ldc_txt toooltip toooltip_like' >
-						<span id=<?php echo "like_$post_id"; ?> ac > Like </span>
-						<span class="toooltiptext" id=<?php echo "tooltip_text_$post_id" ?> >
-						Loading...
-						</span>
-					</span> 
-					<span id=<?php echo "like_count_$post_id"; ?> class='badge' style="font-size: 0.9vw" > <?php echo $number_of_like ?> </span>
+					<span class='ldc_txt' id=<?php echo "txt-like_$post_id" ?> >Like</span> <span class='badge' style="font-size: 0.9vw" id=<?php echo "like_count_$post_id"?> > <?php echo $number_of_like ?> </span>
 
 					<?php
 							}
@@ -202,26 +213,13 @@
 						if(isset($visited_dislike[$post_id]))
 						{
 					?>
-					<span id=<?php echo "txt-dislike_$post_id" ?> class='ldc_txt disliked toooltip toooltip_dislike'  >
-						<span id=<?php echo "disliked_$post_id"; ?> ac > Disliked </span>
-						<span class="toooltiptext" id=<?php echo "tooltip_text_dislike_$post_id"?> >
-						Loading...
-						</span>
-					</span> 
-					<span id=<?php echo "dislike_count_$post_id" ?> class='badge' style="font-size: 0.9vw"   > <?php echo $number_of_dislike ?> </span>
+					<span class='ldc_txt disliked' id=<?php echo "txt-dislike_$post_id" ?> >Disliked</span> <span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id" ?> > <?php echo $number_of_dislike ?> </span>
 					<?php 
 
 						}
 						else{
 					?>
-					<span  id=<?php echo "txt-dislike_$post_id" ?> class='ldc_txt toooltip toooltip_dislike' role="button"  >
-						<span id=<?php echo "dislike_$post_id"; ?> ac > Dislike </span>
-						<span id=<?php echo "tooltip_text_dislike_$post_id"?> class="toooltiptext"  >
-						Loading...
-						</span>
-					</span> 
-					<span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id"?> > <?php echo $number_of_dislike ?> 
-					</span>
+					<span class='ldc_txt' id=<?php echo "txt-dislike_$post_id" ?> >Disike</span> <span class='badge' style="font-size: 0.9vw"  id=<?php echo "dislike_count_$post_id"?> > <?php echo $number_of_dislike ?> </span>
 
 					<?php
 							}
@@ -232,18 +230,13 @@
 						
 						<div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
 							<img class='ldc_img' src='images/comment.png'/>
-							<span class='ldc_txt comment_btn toooltip' id=<?php echo "comment_btn_$post_id"; ?>>
-								Comments
-								<span class="toooltiptext" >
-									View All Comments
-								</span>
-							</span> 
+							<span class='ldc_txt comment_btn' id=<?php echo "comment_btn_$post_id"; ?>>Comments</span> 
 						</div>
 						
 						<div class="form-group comment_div" style="margin-top: 15px;" id=<?php echo "comment_div_$post_id" ?>>
 						<br>
 							
-  							<textarea class="form-control comment_box" rows="2" id=<?php echo "comment_box_$post_id"?> style="resize: none;" placeholder="Write Your Comment Here"></textarea>
+  							<textarea class="form-control comment_box" rows="1" id=<?php echo "comment_box_$post_id"?> style="resize: none;" placeholder="Write Your Comment Here"></textarea>
   							<br>
   							<div id=<?php echo "comment_list_div_$post_id" ?>>
   								
@@ -271,6 +264,8 @@
 
 	
 </div>
+
 			
+
 </body>
 </html>

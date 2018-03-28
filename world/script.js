@@ -44,7 +44,8 @@ $(document).ready(function(){
 								icon:"images/notify.png",
 								});
 								var class_check = notification.search("Class Schedule");
-								var exam_check = notification.search("Upcoming Exam");								//alert(notification);
+								var exam_check = notification.search("Upcoming Exam");
+								var note_check = notification.search("New Notes");								//alert(notification);
 								if(class_check!=-1)
 								{
 									//alert("HI");
@@ -85,6 +86,34 @@ $(document).ready(function(){
 										//window.location.replace("http://localhost/project/world/world.php");
 									}
 								}
+								else if(note_check!=-1)
+								{
+									notify.onclick = function(event)
+									{
+										alert(notifications_id);										//alert("HI");
+										$.ajax({
+											method:"post",
+											async:false,
+											url:"note_link.php",
+											data:{notifications_id:notifications_id},
+											beforeSend:function(data)
+											{
+												//alert("Sending...");
+												
+											},
+											success:function(data){
+												window.open(data,"_blank");	
+											},
+											error:function(data)
+											{
+												//alert(data);
+											}
+										})
+										//window.location.replace("http://localhost/project/world/world.php");
+									}
+
+
+								}
 								
 							}
 
@@ -92,6 +121,17 @@ $(document).ready(function(){
 					})
 				}
 			}
+
+			$("#add_link_panel").hide();
+			$(".link_btn").click(function(){
+				//alert("Hi");
+				$("#add_link_panel").fadeIn(800);
+			})
+			$(".close_link_panel").click(function(){
+				$("#add_link_panel").fadeOut(300);	
+			})
+			
+
 			$(".more_post_loader").hide();
 			var done = false;
 			//var id = lastID = $('.load_more_posts').attr('lastId');
@@ -153,13 +193,15 @@ $(document).ready(function(){
 				if($("#txt-like_"+part).hasClass("liked"))
 				{
 					$("#txt-like_"+part).removeClass("liked");
-					$("#txt-like_"+part).text("Like");
+					$("#like_"+part).text("Like");
 					var i
 					var like_count = $("#like_count_"+part).text();
 					//alert(like_count);
 					if(like_count>0)
 						like_count--;
 					$("#like_count_"+part).text(like_count);
+					$("#liked_"+part).text("Like");
+					
 				}
 				else 
 				{
@@ -169,7 +211,8 @@ $(document).ready(function(){
 					like_count++;
 					$("#like_count_"+part).text(like_count);
 					$("#txt-like_"+part).addClass("liked");
-					$("#txt-like_"+part).text("Liked");
+					$("#like_"+part).text("Liked");
+					
 
 				}
 			}
@@ -183,7 +226,7 @@ $(document).ready(function(){
 						dislike_count--;
 					$("#dislike_count_"+part).text(dislike_count);
 					$("#txt-dislike_"+part).removeClass("disliked");
-					$("#txt-dislike_"+part).text("Dislike");
+					$("#disliked_"+part).text("Dislike");
 				}
 				else 
 				{
@@ -193,7 +236,7 @@ $(document).ready(function(){
 					$("#dislike_count_"+part).text(dislike_count);
 
 					$("#txt-dislike_"+part).addClass("disliked");
-					$("#txt-dislike_"+part).text("Disiked");
+					$("#dislike_"+part).text("Disiked");
 
 				}
 			}//alert(part);
@@ -221,6 +264,8 @@ $(document).ready(function(){
 				},				
 				success:function(data)
 				{
+
+
 					$("#comment_loading_"+post_id).remove();
 					$("#comment_list_div_"+post_id).html(data);
 					return false;
@@ -249,6 +294,7 @@ $(document).ready(function(){
 						data:{post_id:post_id,value:value},
 						success:function(data)
 						{
+							//alert(data);
 							$("#comment_list_div_"+post_id).html(data);
 							$("#"+id).val("");
 							return false;

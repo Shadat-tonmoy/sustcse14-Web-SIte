@@ -4,11 +4,17 @@
 	$user_id = $_SESSION['id'];
 	if(isset($_POST['notification']))
 	{
+		
 		$notification = $_POST['notification'];
 		$time = date("Y-m-d H:i:s");
 		$date = date("Y-m-d");
-		$past_days = date("Y-m-d", strtotime("$date -2 day"));
-		$insert_notification_sql = "INSERT INTO `notification` (`name`,`time`,`date`)VALUES ('$notification','$time','$date')";
+		$past_days = date("Y-m-d", strtotime("$date -2 day"));	
+		if(isset($_POST['link']))
+		{
+			$link = $_POST['link'];
+			$insert_notification_sql = "INSERT INTO `notification` (`name`,`time`,`date`,`link`)VALUES ('$notification','$time','$date','$link')";
+		}
+		else $insert_notification_sql = "INSERT INTO `notification` (`name`,`time`,`date`)VALUES ('$notification','$time','$date')";	
 		$insert_notification_result = mysqli_query($conn,$insert_notification_sql);
 		if($insert_notification_result)
 		{

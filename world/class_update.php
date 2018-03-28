@@ -138,9 +138,10 @@
 				else {
 
 				?>
-				<center>
-					<img src='images/no_update.jpg' class='no_update_img'/>
+				<br>
+				<center class="no_update_msg">
 					<strong><h5 style='font-size: 1vw;''>No class update available...</h5></strong>
+					<br>
 				</center>
 				<?php
 

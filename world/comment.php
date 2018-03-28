@@ -3,12 +3,66 @@ session_start();
 include '../conn.php';
 if(isset($_POST['post_id']) && isset($_POST['value']))
 {
+	$time = date("Y-m-d H:i:s");
+	$date = date("Y-m-d");
 	$post_id = trim($_POST['post_id']);
 	$comment = trim($_POST['value']);
 	$comment_by = $_SESSION['id'];
 	//echo "From php $post_id $comment";
 	$comment_insert_sql = "INSERT INTO `comment` (`comment`,`comment_by`,`comment_to`) VALUES ('$comment','$comment_by','$post_id')";
 	$comment_insert_result = mysqli_query($conn,$comment_insert_sql);
+
+	$comment_by_insert_sql = "UPDATE `posts` SET `commented_by` = IFNULL(concat(`commented_by`,',$comment_by'),',$comment_by') WHERE `id`=$post_id";
+	$comment_by_insert_result = mysqli_query($conn,$comment_by_insert_sql); 
+
+	$commented_by_sql = "SELECT `commented_by`,`posted_by` FROM `posts` WHERE `id`='$post_id'";
+	$commented_by_result = mysqli_query($conn,$commented_by_sql);
+	$row = mysqli_fetch_assoc($commented_by_result);
+	$posted_by = $row['posted_by'];
+	$commented_by = $row['commented_by'];
+
+	$comment_notification_sql = "INSERT INTO `comment_notification` (`commented_to`,`commented_by`,`time`,`date`) VALUES ('$post_id','$comment_by','$time','$date') ";
+	$comment_notification_result = mysqli_query($conn,$comment_notification_sql);
+	$comment_notification_fetch_sql = "SELECT * FROM `comment_notification` ORDER BY `id` DESC LIMIT 1";
+	$comment_notification_fetch_result = mysqli_query($conn,$comment_notification_fetch_sql);
+	$row = mysqli_fetch_assoc($comment_notification_fetch_result);
+	$last_comment_id = $row['id'];
+	//echo $last_comment_id;
+	//if($comment_notifiction_result)
+		//echo "DONE";
+	//else echo mysqli_error($conn);
+	//echo "POSTED BY -> $posted_by, COMMENTED_BY -> $commented_by";
+	if($posted_by!=$comment_by)
+	{
+		$comment_notification_user_sql = "UPDATE `user_data` SET `comment_notification` = IFNULL(concat(`comment_notification`,',$last_comment_id'),',$last_comment_id') WHERE `id`=$posted_by";
+		$comment_notification_user_result = mysqli_query($conn,$comment_notification_user_sql);
+
+		$new_comment_notification_user_sql = "UPDATE `user_data` SET `unseen_notification` = IFNULL(concat(`unseen_notification`,',$last_comment_id'),',$last_comment_id') WHERE `id`=$posted_by";
+		$new_comment_notification_user_result = mysqli_query($conn,$new_comment_notification_user_sql);
+		//echo "posted_by!=comment_by";
+	}
+	//updaet_notification_for_posted_by
+	
+	
+	$commented_by_array = array();
+	$commented_by_array = explode(',', $commented_by);
+	$commented_by_set = array();
+	$commented_by_set = array_unique($commented_by_array);
+	foreach ($commented_by_set as $key => $value) {
+		//echo " <br> in set : $value";
+		$user = $value; 
+		//echo "$user <br>";
+		if($user!=$comment_by && $user!=$posted_by && $user!=NULL)
+		{
+			$comment_notification_user_sql = "UPDATE `user_data` SET `comment_notification` = IFNULL(concat(`comment_notification`,',$last_comment_id'),',$last_comment_id') WHERE `id`=$user";
+			$comment_notification_user_result = mysqli_query($conn,$comment_notification_user_sql);
+
+			$new_comment_notification_user_sql = "UPDATE `user_data` SET `unseen_notification` = IFNULL(concat(`unseen_notification`,',$last_comment_id'),',$last_comment_id') WHERE `id`=$user";
+			$new_comment_notification_user_result = mysqli_query($conn,$new_comment_notification_user_sql);
+			//echo "Other thing - $user and $posted_by ";
+		}
+	}
+	
 	
 }
 $user_array = array(array());
@@ -42,6 +96,12 @@ if($user_data_result)
 		$post_id = $_POST['post_id'];
 		$comment_fetch_sql = "SELECT * FROM `comment` WHERE `comment_to`='$post_id' ORDER BY `id` DESC";
 		$comment_fetch_result = mysqli_query($conn,$comment_fetch_sql);
+		$num_rows = mysqli_num_rows($comment_fetch_result);
+		if($num_rows==0)
+		{
+			$remove_commented_by_sql = "UPDATE `posts` SET `commented_by`= NULL WHERE `id`=$post_id";
+			$remove_commented_by_result = mysqli_query($conn,$remove_commented_by_sql);
+		}
 		while($row = mysqli_fetch_assoc($comment_fetch_result))
 		{
 			$comment = nl2br($row['comment']);

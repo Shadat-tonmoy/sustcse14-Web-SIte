@@ -4,7 +4,7 @@
 	echo "<br><br><br>";
 	if(isset($_POST['user_name']) && isset($_POST['pwd']))
 	{
-		$user_name = $_POST['user_name'];
+		$user_name = ($_POST['user_name']);
 		$password = $_POST['pwd'];
 		$password_hash = md5($password);
 		$sql = "SELECT * FROM user_data WHERE user_name='$user_name' AND password='$password_hash'";
@@ -21,7 +21,7 @@
 			{
 				$cookie_name = "remember";
 				$cookie_value = $id;
-				setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //
+				//setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); //
 				header ("Location:index.php");
 			}
 			else {

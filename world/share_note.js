@@ -151,11 +151,11 @@ $(document).ready(function(){
 				if(ok)
 				{
 					//alert(ok);
-					var notification = "You Have New Notes Uploaded.  ";
+					var notification = "You Have New Notes Uploaded on " + course_name + " under " + type;
 					$.ajax({
 						method:"POST",
 						url:"insert_notification.php",
-						data:{notification:notification},
+						data:{notification:notification,link:link},
 						success:function(data)
 						{
 							//window.location.replace("http://localhost/project/world/world.php");
